@@ -1,7 +1,7 @@
 import UnderContructure from '@/components/UnderConstructure';
 
-const Keperawatan = () => {
+const DetailResep = () => {
     return <UnderContructure />;
 };
 
-export default Keperawatan;
+export default DetailResep;
