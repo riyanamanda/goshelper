@@ -4,6 +4,7 @@ import {
     createColumnHelper,
     flexRender,
     getCoreRowModel,
+    getPaginationRowModel,
     useReactTable,
 } from '@tanstack/react-table';
 import mData from '../../../mock_data.json';
@@ -13,8 +14,6 @@ import Link from 'next/link';
 type Person = (typeof mData)[number];
 
 const Resep = () => {
-    // const defaultData: Person[] = mData;
-
     const [data, setData] = useState(() => [...mData]);
 
     const columnHelper = createColumnHelper<Person>();
@@ -42,9 +41,13 @@ const Resep = () => {
         columnHelper.accessor('nomor', {
             header: '',
             cell: (info) => (
-                <Link href={`resep/${info.getValue()}`}>
-                    <button>Detail</button>
-                </Link>
+                <div className='text-end'>
+                    <Link href={`resep/${info.getValue()}`}>
+                        <button className='px-3 py-1 border border-blue-500/20 rounded shadow-lg text-xs text-white bg-blue-500 shadow-blue-500/20 font-medium tracking-wide hover:border-blue-700 hover:shadow-blue-700/20 hover:bg-blue-700 transition-colors duration-200'>
+                            Details
+                        </button>
+                    </Link>
+                </div>
             ),
         }),
     ];
@@ -53,6 +56,7 @@ const Resep = () => {
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
     });
 
     return (
@@ -86,7 +90,7 @@ const Resep = () => {
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
                             <tr
-                                className='border-b border-gray-800'
+                                className='border-b border-gray-800 hover:bg-gray-900/30 transition-colors duration-75'
                                 key={row.id}
                             >
                                 {row.getVisibleCells().map((cell) => (
@@ -101,6 +105,42 @@ const Resep = () => {
                         ))}
                     </tbody>
                 </table>
+
+                <div className='flex flex-col items-center my-5'>
+                    {/* Help text */}
+                    <span className='text-sm text-gray-700 dark:text-gray-400'>
+                        Page{' '}
+                        <span className='font-semibold text-gray-900 dark:text-white'>
+                            {table.getState().pagination.pageIndex + 1}
+                        </span>{' '}
+                        of{' '}
+                        <span className='font-semibold text-gray-900 dark:text-white'>
+                            {table.getPageCount()}
+                        </span>{' '}
+                        Showing{' '}
+                        <span className='font-semibold text-gray-900 dark:text-white'>
+                            {table.getRowModel().rows.length}
+                        </span>{' '}
+                        Rows
+                    </span>
+                    {/* Buttons */}
+                    <div className='inline-flex mt-2 xs:mt-0'>
+                        <button
+                            className='flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                            onClick={() => table.previousPage()}
+                            disabled={!table.getCanPreviousPage()}
+                        >
+                            Prev
+                        </button>
+                        <button
+                            className='flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                            onClick={() => table.nextPage()}
+                            disabled={!table.getCanNextPage()}
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
