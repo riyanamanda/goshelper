@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: process.env.APP_NAME,
+    title: process.env.NEXT_APP_NAME,
     description: 'Aplikasi pembantu Sistem Informasi Rumah Sakit',
 };
 
