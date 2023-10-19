@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::controller(ResepController::class)
     ->group(function () {
         Route::get('/api/resep', 'index');
+        Route::get('/api/resep/{orderResep}/detil', 'detilResep');
     });
 
 require __DIR__ . '/auth.php';

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ResepDetilResource;
 use App\Http\Resources\ResepResource;
 use App\Models\OrderResep;
 
@@ -20,6 +21,19 @@ class ResepController extends Controller
         return [
             "status" => 200,
             "data" => ResepResource::collection($resep)
+        ];
+    }
+
+    function detilResep($orderResep)
+    {
+        $resep = OrderResep::query()
+            ->with('detil')
+            ->where('NOMOR', $orderResep)
+            ->get();
+
+        return [
+            "status" => 200,
+            "data" => ResepDetilResource::collection($resep)
         ];
     }
 }

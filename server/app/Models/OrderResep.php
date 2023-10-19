@@ -12,6 +12,7 @@ class OrderResep extends Model
     protected $connection = 'gos_layanan';
     protected $table = 'order_resep';
     protected $guarded = [];
+    protected $primaryKey = 'NOMOR';
     protected $keyType = 'string';
     public $increment = false;
 
@@ -29,5 +30,10 @@ class OrderResep extends Model
     function pegawai()
     {
         return $this->belongsTo(Pegawai::class, 'PEMBERI_RESEP', 'ID');
+    }
+
+    function detil()
+    {
+        return $this->hasMany(OrderDetilResep::class, 'ORDER_ID', 'NOMOR');
     }
 }
