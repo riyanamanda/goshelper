@@ -5,20 +5,32 @@ import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+type Detil = {
+    no_rekam_medis: string;
+    nama_pasien: string;
+    jenis_kelamin: string;
+    tanggal_lahir: string;
+    dpjp: string;
+    pemberi_resep: string;
+    no_hp_pemberi_resep: string;
+    tanggal_order: string;
+    obat: any[];
+};
+
 const DetailResep = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [detil, setDetil] = useState<any[]>([]);
-    const params = useParams();
+    const [isLoading, setIsLoading] = useState(true);
+    const [detil, setDetil] = useState<Detil>();
+    const { id } = useParams();
+    const [waktu, setWaktu] = useState();
 
     const getDetil = async () => {
         setIsLoading(true);
 
         await axios
-            .get(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/resep/${params.id}/detil`
-            )
+            .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/resep/${id}/detil`)
             .then((response: any) => {
                 setDetil(response.data.data[0]);
+                console.log(detil);
             })
             .catch((error) => {
                 console.log(error);
@@ -28,8 +40,12 @@ const DetailResep = () => {
             });
     };
 
+    const handlePrint = (event: React.FormEvent) => {
+        console.log('printing');
+    };
     useEffect(() => {
         getDetil();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -42,13 +58,17 @@ const DetailResep = () => {
                 <>
                     <div className='flex gap-5 mt-10'>
                         <div className='border p-5 rounded-lg border-slate-500 shadow w-full'>
+                            <p>Tanggal order: {detil?.tanggal_order}</p>
                             <p>No. RM: {detil?.no_rekam_medis}</p>
-                            <p>Nama Pasien: {detil?.pasien}</p>
+                            <p>Nama Pasien: {detil?.nama_pasien}</p>
+                            <p>Nama Pasien: {detil?.jenis_kelamin}</p>
+                            <p>Nama Pasien: {detil?.tanggal_lahir}</p>
                         </div>
                         <div className='border p-5 rounded-lg border-slate-500 w-full shadow ml-auto'>
                             <p>DPJP: {detil?.dpjp}</p>
                             <p>Pemberi Resep: {detil?.pemberi_resep}</p>
                             <p>Telepon: {detil?.no_hp_pemberi_resep}</p>
+                            <p>Ruang: -</p>
                         </div>
                     </div>
 
@@ -56,12 +76,11 @@ const DetailResep = () => {
                         <div className='mb-5 text-right'>
                             <button
                                 className='px-3 py-1 border text-white rounded shadow-md text-sm font-medium tracking-wide bg-sky-500 border-sky-500/20 shadow-sky-500/20 hover:bg-sky-600 transition-colors duration-200'
-                                onClick={() => console.log('Print clicked')}
+                                onClick={handlePrint}
                             >
                                 Print
                             </button>
                         </div>
-
                         <table className='w-full text-sm text-left'>
                             <thead className='text-xs bg-gray-600/30'>
                                 <tr>
@@ -92,28 +111,28 @@ const DetailResep = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {detil?.detil?.map((value, index) => (
+                                {detil?.obat?.map((item, index) => (
                                     <tr
                                         className='border-b border-gray-800 hover:bg-gray-900/30 transition-colors duration-75'
                                         key={index}
                                     >
                                         <td className='px-6 py-4'>
-                                            {value.nama_obat}
+                                            {item.nama_obat}
                                         </td>
                                         <td className='px-6 py-4'>
-                                            {value.dosis}
+                                            {item.dosis}
                                         </td>
                                         <td className='px-6 py-4'>
-                                            {value.frekuensi}
+                                            {item.frekuensi}
                                         </td>
                                         <td className='px-6 py-4'>
-                                            {value.jumlah_obat}
+                                            {item.jumlah_obat}
                                         </td>
                                         <td className='px-6 py-4'>
-                                            {value.rute_pemberian}
+                                            {item.rute_pemberian}
                                         </td>
                                         <td className='px-6 py-4'>
-                                            {value.keterangan}
+                                            {item.keterangan}
                                         </td>
                                         <td className='px-6 py-4'>
                                             <div className='flex justify-center'>
@@ -121,7 +140,7 @@ const DetailResep = () => {
                                                     <input
                                                         id='pagi'
                                                         type='checkbox'
-                                                        defaultValue='pagi'
+                                                        value='pagi'
                                                         className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                                                     />
                                                     <label
@@ -135,7 +154,7 @@ const DetailResep = () => {
                                                     <input
                                                         id='siang'
                                                         type='checkbox'
-                                                        defaultValue='siang'
+                                                        value='siang'
                                                         className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                                                     />
                                                     <label
@@ -149,7 +168,7 @@ const DetailResep = () => {
                                                     <input
                                                         id='malam'
                                                         type='checkbox'
-                                                        defaultValue='malam'
+                                                        value='malam'
                                                         className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                                                     />
                                                     <label

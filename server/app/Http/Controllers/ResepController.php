@@ -15,8 +15,7 @@ class ResepController extends Controller
             ->select('NOMOR', 'KUNJUNGAN', 'TANGGAL', 'DOKTER_DPJP', 'PEMBERI_RESEP', 'STATUS')
             ->where('TUJUAN', '101040202')
             ->where('STATUS', 2)
-            ->get()
-            ->sortDesc();
+            ->get();
 
         return [
             "status" => 200,

@@ -20,6 +20,7 @@ export default function RootLayout({
         <html lang='id' className='h-full'>
             <body
                 className={`${inter.className} antialiased h-full bg-black text-slate-200 flex flex-col`}
+                suppressHydrationWarning={true}
             >
                 <Header />
                 <main className='flex-1'>

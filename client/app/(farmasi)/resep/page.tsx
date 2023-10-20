@@ -10,6 +10,8 @@ import {
 import Link from 'next/link';
 import Loading from '@/components/Loading';
 import { useResep } from '@/hook/resep';
+import { FaEye } from 'react-icons/fa';
+import Button from '@/components/Button';
 
 type Resep = {
     nomor: string;
@@ -81,14 +83,15 @@ const columns = [
             }
         },
     }),
-    columnHelper.accessor('nomor', {
-        header: '',
-        cell: (info) => (
+    columnHelper.display({
+        id: 'actions',
+        cell: (props) => (
             <div className='text-end'>
-                <Link href={`resep/${info.getValue()}`}>
-                    <button className='px-3 py-1 border border-blue-500/20 rounded shadow-lg text-xs text-white bg-blue-500 shadow-blue-500/20 font-medium tracking-wide hover:border-blue-700 hover:shadow-blue-700/20 hover:bg-blue-700 transition-colors duration-200'>
-                        Details
-                    </button>
+                <Link href={`resep/${props.row.original.nomor}`}>
+                    <Button>
+                        <FaEye />
+                        <span>Lihat</span>
+                    </Button>
                 </Link>
             </div>
         ),
