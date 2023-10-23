@@ -21,11 +21,11 @@ const navigation: Navigation[] = [
         name: 'Resep',
         url: '/resep',
     },
-    {
-        id: 2,
-        name: 'Keperawatan',
-        url: '/indikator-keperawatan',
-    },
+    // {
+    //     id: 2,
+    //     name: 'Keperawatan',
+    //     url: '/indikator-keperawatan',
+    // },
 ];
 
 const Header = () => {
@@ -56,7 +56,7 @@ const Header = () => {
                 </nav>
 
                 <div className='w-2/12 text-right'>
-                    {isLogin ? (
+                    {/* {isLogin ? (
                         <Link href='/logout' className='ml-auto text-right'>
                             <button className='px-3 py-1 text-xs text-white bg-red-500 font-medium tracking-wide border border-red-500/20 shadow-md shadow-red-500/20 rounded hover:bg-red-700 hover:border-red-700/20 hover:shadow-red-700/20 transition-colors duration-200'>
                                 Logout
@@ -68,7 +68,7 @@ const Header = () => {
                                 Login
                             </button>
                         </Link>
-                    )}
+                    )} */}
                 </div>
             </div>
         </header>

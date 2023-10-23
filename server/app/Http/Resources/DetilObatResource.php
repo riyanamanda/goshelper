@@ -58,12 +58,18 @@ class DetilObatResource extends JsonResource
         }
 
         return [
+            "id" => $this->obat->ID,
             "nama_obat" => $this->obat->NAMA,
             "dosis" => $this->DOSIS,
             "jumlah_obat" => (int)$this->JUMLAH,
             "frekuensi" => $this->frekuensi_aturan_pakai->FREKUENSI,
             "rute_pemberian" => $rute,
-            "keterangan" => $this->KETERANGAN ?: "-"
+            "keterangan" => $this->KETERANGAN ?: "-",
+            "jadwal" => [
+                "pagi" => $this->PAGI,
+                "siang" => $this->SIANG,
+                "malam" => $this->MALAM
+            ]
         ];
     }
 }

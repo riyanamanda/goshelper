@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ResepController;
-use App\Models\OrderResep;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +22,7 @@ Route::controller(ResepController::class)
     ->group(function () {
         Route::get('/api/resep', 'index');
         Route::get('/api/resep/{orderResep}/detil', 'detilResep');
+        Route::patch('/api/resep/detil/update', 'updateDetilResep');
     });
 
 require __DIR__ . '/auth.php';

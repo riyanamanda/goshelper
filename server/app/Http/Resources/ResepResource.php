@@ -15,6 +15,7 @@ class ResepResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "nomor" => $this->NOMOR,
             "kunjungan" => $this->KUNJUNGAN,
             "no_rekam_medis" => $this->kunjungan_pasien->pendaftaran->NORM,
             "pasien" => $this->kunjungan_pasien->pendaftaran->pasien->NAMA,
@@ -22,7 +23,6 @@ class ResepResource extends JsonResource
             "pemberi_resep" => $this->pegawai->GELAR_DEPAN . ". " . $this->pegawai->NAMA . ", " . $this->pegawai->GELAR_BELAKANG,
             "tanggal" => $this->TANGGAL,
             "status" => $this->STATUS,
-            "nomor" => $this->NOMOR,
         ];
     }
 }

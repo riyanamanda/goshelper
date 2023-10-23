@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ResepDetilResource;
 use App\Http\Resources\ResepResource;
+use App\Models\OrderDetilResep;
 use App\Models\OrderResep;
+use Illuminate\Http\Request;
 
 class ResepController extends Controller
 {
@@ -33,6 +35,20 @@ class ResepController extends Controller
         return [
             "status" => 200,
             "data" => ResepDetilResource::collection($resep)
+        ];
+    }
+
+    function updateDetilResep(Request $request)
+    {
+        OrderDetilResep::where('ORDER_ID', $request->data['nomor_resep'])
+            ->where('FARMASI', $request->data['id_obat'])
+            ->update([
+                str()->upper($request->data['jadwal']['waktu']) => $request->data['jadwal']['status']
+            ]);
+
+        return [
+            "status" => 200,
+            "data" => []
         ];
     }
 }

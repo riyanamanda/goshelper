@@ -21,12 +21,23 @@ export const useResep = () => {
             });
     };
 
+    const updateJadwal = async ({ data }: any) => {
+        await axios
+            .patch(
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/resep/detil/update`,
+                { data }
+            )
+            .then((response) => console.log(response.data))
+            .catch((error) => console.log(error));
+    };
+
     useEffect(() => {
         getResep();
     }, []);
 
     return {
         resep,
+        updateJadwal,
         isLoading,
     };
 };

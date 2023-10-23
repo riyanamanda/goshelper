@@ -15,6 +15,7 @@ class OrderDetilResep extends Model
     protected $guarded = [];
     protected $keyType = 'string';
     public $increment = false;
+    public $timestamps = false;
 
     function frekuensi_aturan_pakai()
     {
