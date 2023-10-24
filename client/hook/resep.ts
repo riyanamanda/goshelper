@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '@/config/axios';
 import { useEffect, useState } from 'react';
 
 export const useResep = () => {
@@ -8,7 +8,7 @@ export const useResep = () => {
     const getResep = async () => {
         setIsLoading(true);
 
-        await axios
+        await api
             .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/resep`)
             .then((response: any) => {
                 setResep(response.data.data);
@@ -21,8 +21,44 @@ export const useResep = () => {
             });
     };
 
+    const getDetilResep = async ({ no_resep, setDetil, setIsLoading }: any) => {
+        setIsLoading(true);
+
+        await api
+            .get(
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/resep/${no_resep}/detil`
+            )
+            .then((response: any) => {
+                setDetil(response.data.data[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
+
+    const getPrintResep = async ({ no_resep, setDetil, setIsLoading }: any) => {
+        setIsLoading(true);
+
+        await api
+            .get(
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/resep/${no_resep}/print`
+            )
+            .then((response: any) => {
+                setDetil(response.data.data[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
+
     const updateJadwal = async ({ data }: any) => {
-        await axios
+        await api
             .patch(
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/resep/detil/update`,
                 { data }
@@ -37,6 +73,8 @@ export const useResep = () => {
 
     return {
         resep,
+        getDetilResep,
+        getPrintResep,
         updateJadwal,
         isLoading,
     };

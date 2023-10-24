@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PrintResource;
 use App\Http\Resources\ResepDetilResource;
 use App\Http\Resources\ResepResource;
 use App\Models\OrderDetilResep;
@@ -49,6 +50,19 @@ class ResepController extends Controller
         return [
             "status" => 200,
             "data" => []
+        ];
+    }
+
+    function printResep($orderResep)
+    {
+        $resep = OrderResep::query()
+            ->with('detil')
+            ->where('NOMOR', $orderResep)
+            ->get();
+
+        return [
+            "status" => 200,
+            "data" => PrintResource::collection($resep)
         ];
     }
 }

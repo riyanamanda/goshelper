@@ -22,6 +22,7 @@ Route::controller(ResepController::class)
     ->group(function () {
         Route::get('/api/resep', 'index');
         Route::get('/api/resep/{orderResep}/detil', 'detilResep');
+        Route::get('/api/resep/{orderResep}/print', 'printResep');
         Route::patch('/api/resep/detil/update', 'updateDetilResep');
     });
 
