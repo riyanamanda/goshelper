@@ -3,7 +3,7 @@
 import Loading from '@/components/Loading';
 import { useResep } from '@/hook/resep';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Detil = {
     nomor: number;
@@ -26,6 +26,7 @@ const DetailResep = () => {
     const { id: no_resep } = useParams();
     const { getDetilResep, updateJadwal } = useResep();
     const router = useRouter();
+    const ref = useRef(null);
 
     const updateJadwalResep = (data: any) => {
         updateJadwal({ data });
@@ -139,6 +140,11 @@ const DetailResep = () => {
                                                 id={`${item.id}-pagi`}
                                                 type='checkbox'
                                                 value='pagi'
+                                                checked={
+                                                    item.jadwal.pagi === 1
+                                                        ? true
+                                                        : false
+                                                }
                                                 onChange={(e) => {
                                                     updateJadwalResep({
                                                         nomor_resep: no_resep,
@@ -165,6 +171,11 @@ const DetailResep = () => {
                                                 id={`${item.id}-siang`}
                                                 type='checkbox'
                                                 value='siang'
+                                                checked={
+                                                    item.jadwal.siang === 1
+                                                        ? true
+                                                        : false
+                                                }
                                                 onChange={(e) => {
                                                     updateJadwalResep({
                                                         nomor_resep: no_resep,
@@ -191,6 +202,11 @@ const DetailResep = () => {
                                                 id={`${item.id}-malam`}
                                                 type='checkbox'
                                                 value='malam'
+                                                checked={
+                                                    item.jadwal.malam === 1
+                                                        ? true
+                                                        : false
+                                                }
                                                 onChange={(e) => {
                                                     updateJadwalResep({
                                                         nomor_resep: no_resep,

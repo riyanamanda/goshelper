@@ -33,7 +33,7 @@ const Header = () => {
     const pathname = usePathname();
 
     return (
-        <header className='py-5 shadow shadow-slate-700/20'>
+        <header className='py-5 bg-white'>
             <div className='max-w-7xl px-8 mx-auto flex items-center'>
                 <div className='w-2/12 flex items-center justify-start'>
                     <Link href='/'>
@@ -41,14 +41,12 @@ const Header = () => {
                     </Link>
                 </div>
 
-                <nav className='text-sm font-medium space-x-10 mx-auto w-8/12 text-slate-400 text-center'>
+                <nav className='space-x-10 mx-auto w-8/12 text-center font-medium text-stone-600'>
                     {navigation.map((nav) => (
                         <Link
                             href={nav.url}
                             key={nav.id}
-                            className={`${
-                                pathname === nav.url ? 'text-white' : ''
-                            } hover:text-white transition-colors duration-200`}
+                            className='hover:text-stone-900 transition-colors duration-200'
                         >
                             {nav.name}
                         </Link>

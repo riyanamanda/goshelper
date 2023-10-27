@@ -1,10 +1,14 @@
 import ReactLoading from 'react-loading';
 
-const Loading = () => {
+type TProps = {
+    text?: string;
+};
+
+const Loading = ({ text }: TProps) => {
     return (
         <div className='w-full flex flex-col items-center justify-center'>
-            <ReactLoading type='spokes' />
-            <p className='text-xs mt-3'>Loading</p>
+            <ReactLoading type='spokes' color='text-stone-500' />
+            <p className='text-xs mt-3'>{text || 'loading'}</p>
         </div>
     );
 };
