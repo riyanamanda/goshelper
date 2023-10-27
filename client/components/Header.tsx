@@ -21,11 +21,11 @@ const navigation: Navigation[] = [
         name: 'Resep',
         url: '/resep',
     },
-    // {
-    //     id: 2,
-    //     name: 'Keperawatan',
-    //     url: '/indikator-keperawatan',
-    // },
+    {
+        id: 2,
+        name: 'Keperawatan',
+        url: '/indikator-keperawatan',
+    },
 ];
 
 const Header = () => {

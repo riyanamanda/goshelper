@@ -173,6 +173,25 @@ return [
             ]) : [],
         ],
 
+        'gos_medicalrecord' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('medicalrecord_HOST', '127.0.0.1'),
+            'port' => env('medicalrecord_PORT', '3306'),
+            'database' => env('medicalrecord_DATABASE', 'forge'),
+            'username' => env('medicalrecord_USERNAME', 'forge'),
+            'password' => env('medicalrecord_PASSWORD', ''),
+            'unix_socket' => env('medicalrecord_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
     ],
 
     /*

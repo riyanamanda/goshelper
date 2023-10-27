@@ -2,7 +2,7 @@
 
 import Loading from '@/components/Loading';
 import { useResep } from '@/hook/resep';
-import { DataTable } from './data-table';
+import { FarmasiDataTable } from './data-table';
 import { columns } from './columns';
 
 const Resep = () => {
@@ -17,7 +17,7 @@ const Resep = () => {
             {isLoading ? (
                 <Loading />
             ) : (
-                <DataTable columns={columns} data={data} />
+                <FarmasiDataTable columns={columns} data={data} />
             )}
         </div>
     );

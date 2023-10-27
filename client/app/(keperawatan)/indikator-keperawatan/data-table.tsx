@@ -9,20 +9,21 @@ import {
 import {
     flexRender,
     getCoreRowModel,
+    getPaginationRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import React from 'react';
 
 interface IDataTableProps {
     columns: any;
     data: any;
 }
 
-export const FarmasiDataTable = ({ columns, data }: IDataTableProps) => {
+export const KeperawatanDataTable = ({ columns, data }: IDataTableProps) => {
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
     });
 
     return (

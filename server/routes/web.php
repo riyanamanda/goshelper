@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KeperawatanController;
 use App\Http\Controllers\ResepController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,11 @@ Route::controller(ResepController::class)
         Route::get('/api/resep/{orderResep}/detil', 'detilResep');
         Route::get('/api/resep/{orderResep}/print', 'printResep');
         Route::patch('/api/resep/detil/update', 'updateDetilResep');
+    });
+
+Route::controller(KeperawatanController::class)
+    ->group(function () {
+        Route::get('/api/keperawatan', 'index');
     });
 
 require __DIR__ . '/auth.php';
