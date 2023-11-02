@@ -30,6 +30,8 @@ Route::controller(ResepController::class)
 Route::controller(KeperawatanController::class)
     ->group(function () {
         Route::get('/api/keperawatan', 'index');
+        Route::post('/api/keperawatan/store', 'store');
+        Route::get('/api/keperawatan/jenis', 'jenis');
     });
 
 require __DIR__ . '/auth.php';

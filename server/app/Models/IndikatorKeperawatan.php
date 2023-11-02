@@ -13,6 +13,7 @@ class IndikatorKeperawatan extends Model
     protected $table = 'indikator_keperawatan';
     protected $guarded = [];
     protected $primaryKey = 'ID';
+    public $timestamps = false;
 
     function jenis_indikator()
     {
